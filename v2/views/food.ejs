@@ -1,0 +1,36 @@
+<%- include("./partials/header") %>
+<div calss="container">
+<header class="jumbotron">
+	<h1>
+		Welcome to My Menu
+	</h1>
+	<p>
+		This is my Fav Food!!
+	</p>
+ <a href="/food/new">Add Food</a>
+</header>
+	
+	
+		<div class="row "  >
+			<% foods.forEach(function(food){ %>
+			<div class="col-md-3 col-sm-6">
+				<div  class="img-thumbnail img-fluid">
+					<div style="display:flex;flex-wrap:wrap;">
+					<img   src="<%= food.image %>"  alt="">
+					</div>
+					<div class="caption text-center">
+						<h4>
+							<%= food.name %>
+						</h4>
+						<button>
+							<a href="/food/<%= food._id%>">Show More</a>
+						</button>
+					</div>
+				</div>
+			</div>
+			 <%	}) %>
+	        </div>
+		</div>
+	
+
+<%- include("./partials/footer") %>
