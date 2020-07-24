@@ -1,0 +1,17 @@
+<%- include("../partials/header") %>
+<h1>
+	<%= food.name %>
+</h1>
+<img src="<%= food.image%>" alt="">
+<p><%= food.description %></p>
+<p>
+    <a class="btn btn-success" href="/food/<%= food._id %>/reviews/new">Add New Review</a>
+</p>
+<% food.reviews.forEach(function(review){ %>
+<p>
+	<strong><%= review.author %></strong> - <%= review.review %>
+</p>
+<% }); %>
+
+<a href="/food">Go Back!</a>
+<%- include("../partials/footer") %>
