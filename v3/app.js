@@ -2,12 +2,15 @@ var express = require("express");
 var app     = express();
 var bodyParser = require('body-parser');
 var mongoose   = require("mongoose");
-
+var Food       = require("./models/food");
+var Review      = require("./models/review");
+var seedDB     = require("./seeds")
 mongoose.connect('mongodb://localhost:27017/Fav_Food', {useNewUrlParser: true, useUnifiedTopology:true});
 app.use(express.static(__dirname + "/public"));
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine","ejs");
+seedDB();
 
 // var foods = [
 //         {name: "Chole Bhature", image: "https://smedia2.intoday.in/aajtak/images/stories/072015/chole_bhature_pakwan_520_070815033739.jpg"},
@@ -16,12 +19,7 @@ app.set("view engine","ejs");
         
 // ];
 
-var foodSchema = new mongoose.Schema({
-	name : String,
-	image: String,
-	description:String
-});
-var Food = mongoose.model("Food",foodSchema);
+
 
 app.get("/",function(req,res){
 	res.render("home");
@@ -56,7 +54,7 @@ app.get("/food/new",function(req,res){
 });
 
 app.get("/food/:id",function(req,res){
-	Food.findById(req.params.id,function(err,foundFood){
+	Food.findById(req.params.id).populate("reviews").exec(function(err,foundFood){
 	if(err){
 		console.log(err);
 	}else{
