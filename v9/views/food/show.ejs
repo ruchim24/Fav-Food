@@ -1,0 +1,56 @@
+<%- include("../partials/header") %>
+<div  class="container-fluid">
+<div class="row">
+<div class="col-md-5 show">
+	
+<div   style="flex-wrap:wrap;">
+<img  src="<%= food.image%>" alt="">
+</div>
+</div>
+<div class="col-md-7 d-flex align-items-center text-center">
+<div class="container">
+<div class="row">
+<div class="col-sm-6 col-md-12">
+<div class="caption-full ">
+<h1>
+	<%= food.name %>
+</h1>
+<p><%= food.description %></p>
+ <p>
+ <em>Submitted By <%= food.author.username %></em>
+</p>
+</div>
+	</div>
+	</div>
+<hr>
+<div class="row">
+<div class="col-sm-6 col-md-12">
+
+
+<div style="padding-top:5px;" class="well">
+
+<div class="text-right">
+<p>
+    <a class="btn btn-success" href="/food/<%= food._id %>/reviews/new">Add New Review</a>
+</p>
+	</div>
+<% food.reviews.forEach(function(review){ %>
+<div style="margin-left:10px" class="text-left">
+<p>
+	<strong><%= review.author.username  %></strong> - <%= review.review %>
+</p>
+</div>
+<% }); %>
+	<a href="/food">Go Back!</a>
+</div>
+	</div>
+	</div>
+	</div>
+
+
+
+</div>	
+</div>	
+</div>
+
+<%- include("../partials/footer") %>
